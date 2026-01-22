@@ -1,3 +1,2 @@
 sources:
-  - filename: sonic-win-6.5.5.tar.gz
-    sha1: 16a106044cc2f862c7a62885af676a91073efba7
+  sonic-win-6.5.5.tar.gz: 16a106044cc2f862c7a62885af676a91073efba7
