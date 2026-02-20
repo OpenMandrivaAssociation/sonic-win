@@ -1,0 +1,60 @@
+From 97fed1808e52586c21494e61bae79f80096643bb Mon Sep 17 00:00:00 2001
+From: Joseph Crowell <joseph.w.crowell@gmail.com>
+Date: Thu, 12 Feb 2026 13:03:57 +1000
+Subject: [PATCH] properly terminate some CMake rules
+
+(cherry picked from commit dce5567bf8ec472d673c9dfbede8aedc79a067ac)
+---
+ CMakeLists.txt     | 7 +++----
+ src/CMakeLists.txt | 8 ++++----
+ 2 files changed, 7 insertions(+), 8 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 16d5bee6af..5898079a46 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -429,11 +429,10 @@ add_definitions(
+ )
+ 
+ # Enable debug logging for non-release builds
+-string(TOUPPER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_UPPER)
+-if(NOT CMAKE_BUILD_TYPE_UPPER STREQUAL "RELEASE")
+-    add_definitions(-DKWIN_LOGGING_LEVEL=QtDebugMsg)
++if(CMAKE_BUILD_TYPE AND NOT CMAKE_BUILD_TYPE STREQUAL "Release")
++    add_compile_definitions("KWIN_LOGGING_LEVEL=QtDebugMsg")
+ else()
+-    add_definitions(-DKWIN_LOGGING_LEVEL=QtWarningMsg)
++    add_compile_definitions("KWIN_LOGGING_LEVEL=QtWarningMsg")
+ endif()
+ 
+ ecm_set_disabled_deprecation_versions(QT 5.15
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 958795568a..3daeb9cd82 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -31,13 +31,13 @@ set_target_properties(kwin PROPERTIES
+ )
+ 
+ target_compile_definitions(kwin PRIVATE
+-    -DTRANSLATION_DOMAIN=\"kwin_x11\"
++    "TRANSLATION_DOMAIN=\"kwin_x11\""
+ )
+ 
+ # Enable Qt logging categories for non-release builds
+-if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
++if(CMAKE_BUILD_TYPE AND NOT CMAKE_BUILD_TYPE STREQUAL "Release")
+     target_compile_definitions(kwin PRIVATE
+-        -DQT_LOGGING_RULES="kwin.*=true;libkwin.*=true;LIBKWIN.*=true"
++        "$<$<NOT:$<CONFIG:Release>>:QT_LOGGING_RULES=kwin.*=true\;libkwin.*=true\;LIBKWIN.*=true>"
+     )
+ endif()
+ 
+@@ -374,7 +374,7 @@ target_link_libraries(kwin_x11
+     KF6::GlobalAccel
+ )
+ target_compile_definitions(kwin_x11 PRIVATE
+-    -DTRANSLATION_DOMAIN=\"kwin_x11\"
++    "TRANSLATION_DOMAIN=\"kwin_x11\""
+ )
+ kcoreaddons_target_static_plugins(kwin_x11 NAMESPACE "${KWIN_PLUGINDIR}/effects/plugins")
+ install(TARGETS kwin_x11 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
