@@ -9,7 +9,7 @@
 
 Summary: An X11-only, lighter-weight fork of KWin
 Name: sonic-win
-Version: 6.6.0
+Version: 6.6.1
 Release: %{?git:0.%{git}.}1
 URL: https://github.com/Sonic-DE/sonic-win
 License: GPL
@@ -125,7 +125,7 @@ BuildOption: -DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 Conflicts: kwin-x11
 
 %patchlist
-sonic-win-fix-cmake-rules.patch
+# sonic-win-fix-cmake-rules.patch
 
 %description
 sonic-win is an X11 window manager and a compositing manager. 
