@@ -1,7 +1,7 @@
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 -o "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
 #define git 20240222
-%define gitbranch Plasma/6.5
+%define gitbranch Plasma/6.6
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 # (tpg) optimize it a bit
@@ -9,7 +9,7 @@
 
 Summary: An X11-only, lighter-weight fork of KWin
 Name: sonic-win
-Version: 6.5.5
+Version: 6.6.0
 Release: %{?git:0.%{git}.}1
 URL: https://github.com/Sonic-DE/sonic-win
 License: GPL
@@ -19,9 +19,6 @@ Source0:	%url/archive/%{gitbranch}/kwin-x11-%{gitbranchd}.tar.bz2#/kwin-%{git}.t
 %else
 Source0: %url/archive/refs/tags/%{version}.tar.gz#/%name-%version.tar.gz
 %endif
-# Patch0: kwin-6.3.3-wayland-egl-is-wayland.patch
-# (tpg) is it still needed ?
-#Patch1: kwin-5.3.0-enable-minimizeall.patch
 
 BuildRequires: appstream
 BuildRequires: pkgconfig(egl)
@@ -58,10 +55,6 @@ BuildRequires: pkgconfig(gbm)
 BuildRequires: pkgconfig(udev)
 BuildRequires: pkgconfig(libdrm)
 BuildRequires: pkgconfig(libcanberra)
-BuildRequires: pkgconfig(wayland-client)
-BuildRequires: pkgconfig(wayland-cursor)
-BuildRequires: pkgconfig(wayland-egl)
-BuildRequires: pkgconfig(wayland-protocols)
 BuildRequires: pkgconfig(x11)
 BuildRequires: pkgconfig(xcb)
 BuildRequires: pkgconfig(xcb-composite)
@@ -97,7 +90,6 @@ BuildRequires: cmake(KF6Crash)
 BuildRequires: cmake(KF6Notifications)
 BuildRequires: cmake(Plasma) >= 5.90.0
 BuildRequires: cmake(PlasmaQuick) >= 5.90.0
-BuildRequires: cmake(Wayland) >= 5.90.0
 BuildRequires: cmake(KDecoration3)
 BuildRequires: cmake(KF6IdleTime)
 BuildRequires: cmake(KF6GlobalAccel)
@@ -108,17 +100,14 @@ BuildRequires: cmake(KF6Runner)
 BuildRequires: cmake(KF6GlobalAccel)
 BuildRequires: cmake(KF6Auth)
 BuildRequires: cmake(KGlobalAccelD)
-BuildRequires: cmake(PlasmaWaylandProtocols)
 BuildRequires: pkgconfig(xkbcommon)
 BuildRequires: pkgconfig(lcms2)
 BuildRequires: pkgconfig(libpipewire-0.3)
 BuildRequires: pkgconfig(libdisplay-info)
 BuildRequires: cmake(KPipeWire) > 5.27.50
-BuildRequires: cmake(KWayland)
 BuildRequires: pkgconfig(vulkan)
 BuildRequires: cmake(VulkanHeaders)
 # FIXME Package QAccessibilityClient6 and BR it
-BuildRequires: x11-server-xwayland
 BuildRequires: hwdata
 #BuildRequires: libhybris
 Suggests:	kwin-aurorae
@@ -135,6 +124,9 @@ BuildOption: -DBUILD_WITH_QT6:BOOL=ON
 BuildOption: -DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 Conflicts: kwin-x11
 
+%patchlist
+sonic-win-fix-cmake-rules.patch
+
 %description
 sonic-win is an X11 window manager and a compositing manager. 
 Its primary usage is in conjunction with a Desktop Shell 
@@ -150,6 +142,7 @@ using sonic-win as it's window manager.
 Summary: Development files for the Sonic window manager
 Group: Development/KDE and Qt
 Requires: %{name} = %{EVRD}
+Conflicts: kwin-x11-devel
 
 %description devel
 Development files for the Sonic window manager
