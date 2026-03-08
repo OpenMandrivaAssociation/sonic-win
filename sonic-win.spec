@@ -9,7 +9,7 @@
 
 Summary: An X11-only, lighter-weight fork of KWin
 Name: sonic-win
-Version: 6.6.1
+Version: 6.6.2.1
 Release: %{?git:0.%{git}.}1
 URL: https://github.com/Sonic-DE/sonic-win
 License: GPL
