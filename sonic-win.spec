@@ -9,16 +9,16 @@
 
 Summary: An X11-only, lighter-weight fork of KWin
 Name: sonic-win
-Version: 6.6.2.1
+Version: 6.6.3
 Release: %{?git:0.%{git}.}1
 URL: https://github.com/Sonic-DE/sonic-win
 License: GPL
 Group: System/Libraries
-%if 0%{?git:1}
-Source0:	%url/archive/%{gitbranch}/kwin-x11-%{gitbranchd}.tar.bz2#/kwin-%{git}.tar.bz2
-%else
+# %if 0%{?git:1}
+# Source0:	%url/archive/%{gitbranch}/kwin-x11-%{gitbranchd}.tar.bz2#/kwin-%{git}.tar.bz2
+# %else
 Source0: %url/archive/refs/tags/%{version}.tar.gz#/%name-%version.tar.gz
-%endif
+# %endif
 
 BuildRequires: appstream
 BuildRequires: pkgconfig(egl)
@@ -88,12 +88,20 @@ BuildRequires: cmake(KF6NewStuff)
 BuildRequires: cmake(KF6KCMUtils)
 BuildRequires: cmake(KF6Crash)
 BuildRequires: cmake(KF6Notifications)
-BuildRequires: cmake(Plasma) >= 5.90.0
-BuildRequires: cmake(PlasmaQuick) >= 5.90.0
+
+# pending rename
+# BuildRequires: cmake(Plasma) >= 5.90.0
+# BuildRequires: cmake(PlasmaQuick) >= 5.90.0
+BuildRequires: %{_lib}SonicDE-devel
+
 BuildRequires: cmake(KDecoration3)
 BuildRequires: cmake(KF6IdleTime)
 BuildRequires: cmake(KF6GlobalAccel)
-BuildRequires: cmake(KScreenLocker) > 5.27.50
+
+# pending rename
+# BuildRequires: cmake(KScreenLocker) > 5.27.50
+BuildRequires: sonic-screenlocker-devel
+
 BuildRequires: cmake(Breeze)
 BuildRequires: cmake(KF6Kirigami2)
 BuildRequires: cmake(KF6Runner)
@@ -111,7 +119,11 @@ BuildRequires: cmake(VulkanHeaders)
 BuildRequires: hwdata
 #BuildRequires: libhybris
 Suggests:	kwin-aurorae
-Requires: libplasma plasma-framework-common
+
+# pending rename
+# Requires: libplasma plasma-framework-common
+Requires: %{_lib}SonicDE sonic-framework-common
+
 #(tpg) this is needed for kcm_kwin_effects
 Requires: glib-networking
 # Obsolete packages that used to be split out solely for old policy reasons
@@ -125,7 +137,7 @@ BuildOption: -DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 Conflicts: kwin-x11
 
 %patchlist
-# sonic-win-fix-cmake-rules.patch
+
 
 %description
 sonic-win is an X11 window manager and a compositing manager. 
