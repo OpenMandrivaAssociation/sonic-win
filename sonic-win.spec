@@ -10,7 +10,7 @@
 Summary: An X11-only, lighter-weight fork of KWin
 Name: sonic-win
 Version: 6.6.3
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 URL: https://github.com/Sonic-DE/sonic-win
 License: GPL
 Group: System/Libraries
@@ -105,9 +105,13 @@ BuildRequires: sonic-screenlocker-devel
 BuildRequires: cmake(Breeze)
 BuildRequires: cmake(KF6Kirigami2)
 BuildRequires: cmake(KF6Runner)
-BuildRequires: cmake(KF6GlobalAccel)
-BuildRequires: cmake(KF6Auth)
-BuildRequires: cmake(KGlobalAccelD)
+
+# pending rename
+# BuildRequires: cmake(KF6Auth)
+# BuildRequires: cmake(KGlobalAccelD)
+BuildRequires: %{_lib}SonicFrameworksAuth-devel
+BuildRequires: %{_lib}SonicDEKeybindDaemon-devel
+
 BuildRequires: pkgconfig(xkbcommon)
 BuildRequires: pkgconfig(lcms2)
 BuildRequires: pkgconfig(libpipewire-0.3)
@@ -152,7 +156,7 @@ using sonic-win as it's window manager.
 
 %package devel
 Summary: Development files for the Sonic window manager
-Group: Development/KDE and Qt
+Group: Development/SonicDE and Qt
 Requires: %{name} = %{EVRD}
 Conflicts: kwin-x11-devel
 
