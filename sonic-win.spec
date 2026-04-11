@@ -103,15 +103,22 @@ BuildRequires: %{_lib}SonicDE-devel
 BuildRequires: %{_lib}sonicdecorations3-devel
 
 BuildRequires: cmake(KF6IdleTime)
-BuildRequires: cmake(KF6GlobalAccel)
+
+# pending rename
+# BuildRequires: cmake(KF6GlobalAccel)
+BuildRequires: %{_lib}SonicFrameworksKeybind-devel
 
 # pending rename
 # BuildRequires: cmake(KScreenLocker) > 5.27.50
 BuildRequires: sonic-screenlocker-devel
 
 BuildRequires: cmake(Breeze)
-BuildRequires: cmake(KF6Kirigami2)
-BuildRequires: cmake(KF6Runner)
+
+# pending rename
+# BuildRequires: cmake(KF6Kirigami2)
+# BuildRequires: cmake(KF6Runner)
+BuildRequires: %{_lib}SonicFrameworksQuickUI-devel
+BuildRequires: %{_lib}SonicFrameworksRunner-devel
 
 # pending rename
 # BuildRequires: cmake(KF6Auth)
