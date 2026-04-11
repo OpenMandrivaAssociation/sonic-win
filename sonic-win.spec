@@ -9,15 +9,15 @@
 
 Summary: An X11-only, lighter-weight fork of KWin
 Name: sonic-win
-Version: 6.6.3
-Release: %{?git:0.%{git}.}2
+Version: 6.6.4
+Release: %{?git:0.%{git}.}1
 URL: https://github.com/Sonic-DE/sonic-win
 License: GPL
 Group: System/Libraries
 # %if 0%{?git:1}
 # Source0:	%url/archive/%{gitbranch}/kwin-x11-%{gitbranchd}.tar.bz2#/kwin-%{git}.tar.bz2
 # %else
-Source0: %url/archive/refs/tags/%{version}.tar.gz#/%name-%version.tar.gz
+Source0: %url/archive/%version/%name-%version.tar.gz
 # %endif
 
 BuildRequires: appstream
@@ -81,7 +81,11 @@ BuildRequires: pkgconfig(libcap)
 BuildRequires: pkgconfig(libei-1.0)
 BuildRequires: pkgconfig(libeis-1.0)
 BuildRequires: cmake(ECM)
-BuildRequires: cmake(PlasmaActivities)
+
+# pending rename
+# BuildRequires: cmake(PlasmaActivities)
+BuildRequires: %{_lib}SonicDEActivities-devel
+
 BuildRequires: cmake(KF6Declarative)
 BuildRequires: cmake(KF6DocTools)
 BuildRequires: cmake(KF6NewStuff)
@@ -94,7 +98,10 @@ BuildRequires: cmake(KF6Notifications)
 # BuildRequires: cmake(PlasmaQuick) >= 5.90.0
 BuildRequires: %{_lib}SonicDE-devel
 
-BuildRequires: cmake(KDecoration3)
+# pending rename
+# BuildRequires: cmake(KDecoration3)
+BuildRequires: %{_lib}sonicdecorations3-devel
+
 BuildRequires: cmake(KF6IdleTime)
 BuildRequires: cmake(KF6GlobalAccel)
 
