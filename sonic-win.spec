@@ -9,7 +9,7 @@
 
 Summary: An X11-only, lighter-weight fork of KWin
 Name: sonic-win
-Version: 6.6.4
+Version: 6.6.5
 Release: %{?git:0.%{git}.}1
 URL: https://github.com/Sonic-DE/sonic-win
 License: GPL
@@ -46,7 +46,10 @@ BuildRequires: cmake(Qt6Core5Compat)
 BuildRequires: cmake(KF6DBusAddons)
 BuildRequires: cmake(KF6Service)
 BuildRequires: cmake(KF6Svg)
-BuildRequires: cmake(KNightTime)
+# pending rename
+# BuildRequires: cmake(KNightTime)
+BuildRequires: %{_lib}SonicNightLight-devel
+
 BuildRequires: pkgconfig(freetype2)
 BuildRequires: pkgconfig(fontconfig)
 BuildRequires: pkgconfig(libinput)
