@@ -48,7 +48,7 @@ BuildRequires: cmake(KF6Service)
 BuildRequires: cmake(KF6Svg)
 # pending rename
 # BuildRequires: cmake(KNightTime)
-BuildRequires: %{_lib}SonicNightLight-devel
+BuildRequires: %{_lib}SonicDENightLight-devel
 
 BuildRequires: pkgconfig(freetype2)
 BuildRequires: pkgconfig(fontconfig)
@@ -87,10 +87,11 @@ BuildRequires: cmake(ECM)
 
 # pending rename
 # BuildRequires: cmake(PlasmaActivities)
+# BuildRequires: cmake(KF6DocTools)
 BuildRequires: %{_lib}SonicDEActivities-devel
+BuildRequires: %{_lib}SonicFrameworksDocTools-devel
 
 BuildRequires: cmake(KF6Declarative)
-BuildRequires: cmake(KF6DocTools)
 BuildRequires: cmake(KF6NewStuff)
 BuildRequires: cmake(KF6KCMUtils)
 BuildRequires: cmake(KF6Crash)
@@ -180,6 +181,9 @@ Conflicts: kwin-x11-devel
 %description devel
 Development files for the Sonic window manager
 
+%install -a
+rm -rf %{buildroot}/%{_libdir}/cmake
+
 %files -f %{name}.lang
 %{_bindir}/kwin_x11
 %{_datadir}/kwin-x11
@@ -213,5 +217,7 @@ Development files for the Sonic window manager
 
 %files devel
 %{_includedir}/kwin-x11
-%{_libdir}/cmake/KWinX11
-%{_libdir}/cmake/KWinX11DBusInterface
+
+# pending rename
+# %{_libdir}/cmake/KWinX11
+# %{_libdir}/cmake/KWinX11DBusInterface
