@@ -46,9 +46,7 @@ BuildRequires: cmake(Qt6Core5Compat)
 BuildRequires: cmake(KF6DBusAddons)
 BuildRequires: cmake(KF6Service)
 BuildRequires: cmake(KF6Svg)
-# pending rename
-# BuildRequires: cmake(KNightTime)
-BuildRequires: %{_lib}SonicDENightLight-devel
+BuildRequires: cmake(KNightTime)
 
 BuildRequires: pkgconfig(freetype2)
 BuildRequires: pkgconfig(fontconfig)
