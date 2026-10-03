@@ -181,9 +181,6 @@ Conflicts: kwin-x11-devel
 %description devel
 Development files for the Sonic window manager
 
-%install -a
-rm -rf %{buildroot}/%{_libdir}/cmake
-
 %files -f %{name}.lang
 %{_bindir}/kwin_x11
 %{_datadir}/kwin-x11
@@ -217,7 +214,5 @@ rm -rf %{buildroot}/%{_libdir}/cmake
 
 %files devel
 %{_includedir}/kwin-x11
-
-# pending rename
-# %{_libdir}/cmake/KWinX11
-# %{_libdir}/cmake/KWinX11DBusInterface
+%{_libdir}/cmake/KWinX11
+%{_libdir}/cmake/KWinX11DBusInterface
